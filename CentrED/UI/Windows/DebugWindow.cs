@@ -10,7 +10,7 @@ namespace CentrED.UI.Windows;
 public class DebugWindow : Window
 {
     public override string Name => "Debug";
-    public override ImGuiWindowFlags WindowFlags => ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoResize;
+    public override ImGuiWindowFlags WindowFlags => ImGuiWindowFlags.None;
 
     private int _gotoX;
     private int _gotoY;

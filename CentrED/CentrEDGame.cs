@@ -15,7 +15,7 @@ public class CentrEDGame : Game
     public MapManager MapManager;
     public UIManager UIManager;
     public bool Closing { get; set; }
-
+    
     public CentrEDGame()
     {
         _gdm = new GraphicsDeviceManager(this)
@@ -34,7 +34,7 @@ public class CentrEDGame : Game
         Window.AllowUserResizing = true;
         Window.ClientSizeChanged += OnWindowResized;
     }
-
+    
     protected override void Initialize()
     {
         if (_gdm.GraphicsDevice.Adapter.IsProfileSupported(GraphicsProfile.HiDef))
@@ -82,14 +82,6 @@ public class CentrEDGame : Game
         base.Update(gameTime);
     }
 
-    protected override bool BeginDraw()
-    {
-        //Set main window bounds as current viewport
-        var bounds = Window.ClientBounds;
-        GraphicsDevice.Viewport = new Viewport(0,0, bounds.Width, bounds.Height);
-        return base.BeginDraw();
-    }
-
     protected override void Draw(GameTime gameTime)
     {
         // if (!IsActive)
@@ -110,7 +102,11 @@ public class CentrEDGame : Game
     protected override void EndDraw()
     {
         base.EndDraw();
+        var prevViewport = GraphicsDevice.Viewport;
+        var prevScissorRect = GraphicsDevice.ScissorRectangle;
         UIManager.DrawOtherWindows();
+        GraphicsDevice.Viewport = prevViewport;
+        GraphicsDevice.ScissorRectangle = prevScissorRect;
     }
 
 
