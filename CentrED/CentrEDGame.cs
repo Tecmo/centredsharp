@@ -49,7 +49,6 @@ public class CentrEDGame : Game
         UIManager = new UIManager(_gdm.GraphicsDevice, Window);
         RadarMap.Initialize(_gdm.GraphicsDevice);
         SDL_MaximizeWindow(Window.Handle);
-        // OnWindowResized(Window, null);
 
         base.Initialize();
     }
