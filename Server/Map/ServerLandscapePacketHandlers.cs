@@ -373,8 +373,8 @@ public partial class ServerLandscape
                 }
             }
 
-            targetLandTile.Id = landTile.Id;
-            targetLandTile.Z = landTile.Z;
+            InternalSetLandId(targetLandTile, landTile.Id);
+            InternalSetLandZ(targetLandTile, landTile.Z);
 
             switch (copyMove.Type)
             {
@@ -423,7 +423,7 @@ public partial class ServerLandscape
 
             foreach (var staticTile in staticTiles)
             {
-                InternalSetStaticZ(staticTile, (sbyte)Math.Clamp(landTile.Z + diff, -128, 127));
+                InternalSetStaticZ(staticTile, (sbyte)Math.Clamp(staticTile.Z + diff, -128, 127));
             }
         }
         else if (lso is LsDrawTerrain drawTerrain)
@@ -465,7 +465,7 @@ public partial class ServerLandscape
             {
                 case LSO.StaticsPlacement.Terrain:
                 {
-                    staticItem.Z = landTile.Z;
+                    InternalSetStaticZ(staticItem, landTile.Z);
                     break;
                 }
                 case LSO.StaticsPlacement.Top:
@@ -482,12 +482,12 @@ public partial class ServerLandscape
                         if (staticTop > topZ)
                             topZ = staticTop;
                     }
-                    staticItem.Z = topZ;
+                    InternalSetStaticZ(staticItem, topZ);
                     break;
                 }
                 case LSO.StaticsPlacement.Fix:
                 {
-                    staticItem.Z = addStatics.FixedZ;
+                    InternalSetStaticZ(staticItem, addStatics.FixedZ);
                     break;
                 }
             }
